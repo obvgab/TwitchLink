@@ -37,11 +37,16 @@ public struct listStruct: Codable {
 // Code adapted from twitch-m3u8, originally node.js
 @available(macOS 12.0.0, iOS 15.0.0, *)
 public struct StreamLink {
-    // Client ID derived from streamlink on Github
-    public var clientID: String?
     
-    public init(clientID: String) {
+    // Client ID and hash can be derived from streamlink on Github if necessary
+    // clientID = kimne78kx3ncx6brgo4mv6wki5h1ko
+    // hash = 0828119ded1c13477966434e15800ff57ddacf13ba1911c129dc2200705b0712
+    public var clientID: String?
+    public var hash: String?
+    
+    public init(clientID: String, hash: String) {
         self.clientID = clientID
+        self.hash = hash
     }
     
     // Retrieving access token from Twitch from ID (VOD or Stream)
@@ -57,7 +62,7 @@ public struct StreamLink {
                     "extensions": [
                         "persistedQuery": [
                             "version": 1,
-                            "sha256Hash": "0828119ded1c13477966434e15800ff57ddacf13ba1911c129dc2200705b0712"
+                            "sha256Hash": hash!
                         ]
                     ],
                     "variables": [
